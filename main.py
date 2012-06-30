@@ -5,7 +5,9 @@ Original software copyright 2010 Mark Holmquist and Logan May.
 
 Some recent modifications copyright 2012 Mark Holmquist.
 
-All of this software is licensed under the GNU GPLv3 or later, please see the
+This file is part of redlandside.
+
+redlandside is licensed under the GNU GPLv3 or later, please see the
 COPYING file in this directory or http://www.gnu.org/licenses/gpl-3.0.html for
 more information.
 """

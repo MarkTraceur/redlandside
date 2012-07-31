@@ -19,6 +19,12 @@ makes them easy to manage. The command is this (run it as root):
 
 # apt-get install python-qt4
 
+=== Fedora package manager (yum) ===
+
+Similar to the Debian method above, but for Fedora!
+
+# yum install pyqt-devel
+
 === Python package manager (pip or easy_install) ===
 
 This next way has its advantages, too! For example, rather than installing the
@@ -36,6 +42,17 @@ please submit a pull request or issue to this project!
 
 Installation is as simple as downloading the files! Since there's not yet any
 package management work done, we don't have to do anything else.
+
+== Language Support ==
+
+This project currently supports these languages:
+
+* Python
+* C++
+* Prolog
+* Lisp
+* LOLCODE
+* Whitespace
 
 == Running ==
 

@@ -82,68 +82,76 @@ class MainWindow (PyQt4.QtGui.QMainWindow):
 
         # Creates a similar shortcut for saving a file
 
-        savefile = PyQt4.QtGui.QAction(PyQt4.QtGui.QIcon('icons/savefile.png'),
+        self.savefile = PyQt4.QtGui.QAction(PyQt4.QtGui.QIcon('icons/savefile.png'),
                                        'Save...', self)
-        savefile.setShortcut('Ctrl+S')
-        savefile.setStatusTip('Create a new file')
-        self.connect(savefile, PyQt4.QtCore.SIGNAL('triggered()'),
+        self.savefile.setShortcut('Ctrl+S')
+        self.savefile.setStatusTip('Save this file')
+        self.savefile.setEnabled(False)
+        self.connect(self.savefile, PyQt4.QtCore.SIGNAL('triggered()'),
                      self.currentfile.savefile)
 
         # Creates a similar shortcut for saving a file, forcing a dialog.
 
-        saveas = PyQt4.QtGui.QAction(PyQt4.QtGui.QIcon('icons/savefile.png'),
+        self.saveas = PyQt4.QtGui.QAction(PyQt4.QtGui.QIcon('icons/savefile.png'),
                                      'Save as...', self)
-        saveas.setStatusTip('Save the project as a different filename')
-        self.connect(saveas, PyQt4.QtCore.SIGNAL('triggered()'),
+        self.saveas.setStatusTip('Save this file with a different filename')
+        self.saveas.setEnabled(False)
+        self.connect(self.saveas, PyQt4.QtCore.SIGNAL('triggered()'),
                      self.currentfile.saveas)
 
         # Creates a similar shortcut for building a file
 
         buildicon = PyQt4.QtGui.QIcon('icons/buildonly.png')
-        buildonly = PyQt4.QtGui.QAction(buildicon, 'Build (Ctrl-T)', self)
-        buildonly.setShortcut('Ctrl+T')
-        buildonly.setStatusTip('Build the project')
-        self.connect(buildonly, PyQt4.QtCore.SIGNAL('triggered()'),
+        self.buildonly = PyQt4.QtGui.QAction(buildicon, 'Build (Ctrl-T)', self)
+        self.buildonly.setShortcut('Ctrl+T')
+        self.buildonly.setStatusTip('Build the project')
+        self.buildonly.setEnabled(False)
+        self.connect(self.buildonly, PyQt4.QtCore.SIGNAL('triggered()'),
                      self.onlybuild)
 
         # Creates the build-and-run shortcut
         bricon = PyQt4.QtGui.QIcon('icons/buildandrun.png')
-        buildrun = PyQt4.QtGui.QAction(bricon, 'Build and Run (Ctrl-B)', self)
-        buildrun.setShortcut('Ctrl+B')
-        buildrun.setStatusTip('Build the project and run it')
-        self.connect(buildrun, PyQt4.QtCore.SIGNAL('triggered()'),
+        self.buildrun = PyQt4.QtGui.QAction(bricon, 'Build and Run (Ctrl-B)', self)
+        self.buildrun.setShortcut('Ctrl+B')
+        self.buildrun.setStatusTip('Build the project and run it')
+        self.buildrun.setEnabled(False)
+        self.connect(self.buildrun, PyQt4.QtCore.SIGNAL('triggered()'),
                      self.buildandrun)
 
         # Creates the run shortcut
 
-        runonly = PyQt4.QtGui.QAction(PyQt4.QtGui.QIcon('icons/runonly.png'),
+        self.runonly = PyQt4.QtGui.QAction(PyQt4.QtGui.QIcon('icons/runonly.png'),
                                       'Run (Ctrl-R)', self)
-        runonly.setShortcut('Ctrl+R')
-        runonly.setStatusTip('Run the latest build')
-        self.connect(runonly, PyQt4.QtCore.SIGNAL('triggered()'), self.onlyrun)
+        self.runonly.setShortcut('Ctrl+R')
+        self.runonly.setStatusTip('Run the latest build')
+        self.runonly.setEnabled(False)
+        self.connect(self.runonly, PyQt4.QtCore.SIGNAL('triggered()'), self.onlyrun)
 
         # Creates the copy shortcut
 
-        copy = PyQt4.QtGui.QAction('Copy', self)
-        copy.setShortcut('Ctrl+C')
-        copy.setStatusTip('Copy the selected text')
-        self.connect(copy, PyQt4.QtCore.SIGNAL('triggered()'), self.textedit,
+        self.copy = PyQt4.QtGui.QAction('Copy', self)
+        self.copy.setShortcut('Ctrl+C')
+        self.copy.setStatusTip('Copy the selected text')
+        self.copy.setEnabled(False)
+        self.connect(self.copy, PyQt4.QtCore.SIGNAL('triggered()'), self.textedit,
                      PyQt4.QtCore.SLOT('copy()'))
 
         # Create the cut shortcut
 
-        cut = PyQt4.QtGui.QAction('Cut', self)
-        cut.setShortcut('Ctrl+X')
-        cut.setStatusTip('Cut the selected text')
-        self.connect(cut, PyQt4.QtCore.SIGNAL('triggered()'), self.textedit,
+        self.cut = PyQt4.QtGui.QAction('Cut', self)
+        self.cut.setShortcut('Ctrl+X')
+        self.cut.setStatusTip('Cut the selected text')
+        self.cut.setEnabled(False)
+        self.connect(self.cut, PyQt4.QtCore.SIGNAL('triggered()'), self.textedit,
                      PyQt4.QtCore.SLOT('cut()'))
 
         # Create the paste shortcut
 
-        paste = PyQt4.QtGui.QAction('Paste', self)
-        paste.setShortcut('Ctrl+V')
-        paste.setStatusTip('Paste text from the clipboard')
-        self.connect(paste, PyQt4.QtCore.SIGNAL('triggered()'), self.textedit,
+        self.paste = PyQt4.QtGui.QAction('Paste', self)
+        self.paste.setShortcut('Ctrl+V')
+        self.paste.setStatusTip('Paste text from the clipboard')
+        self.paste.setEnabled(False)
+        self.connect(self.paste, PyQt4.QtCore.SIGNAL('triggered()'), self.textedit,
                      PyQt4.QtCore.SLOT('paste()'))
 
         # Initialize Status bar
@@ -159,26 +167,26 @@ class MainWindow (PyQt4.QtGui.QMainWindow):
         file = menubar.addMenu('&File')
         file.addAction(newfile)
         file.addAction(openfile)
-        file.addAction(savefile)
-        file.addAction(saveas)
+        file.addAction(self.savefile)
+        file.addAction(self.saveas)
         file.addAction(exit)
 
         # Creates the edit menu, adding in the appropriate contents
 
         edit = menubar.addMenu('&Edit')
-        edit.addAction(copy)
-        edit.addAction(cut)
-        edit.addAction(paste)
+        edit.addAction(self.copy)
+        edit.addAction(self.cut)
+        edit.addAction(self.paste)
 
         # Make a toolbar with all the trimmings
 
         self.toolbar = self.addToolBar('Buttons')
         self.toolbar.addAction(newfile)
         self.toolbar.addAction(openfile)
-        self.toolbar.addAction(savefile)
-        self.toolbar.addAction(buildonly)
-        self.toolbar.addAction(buildrun)
-        self.toolbar.addAction(runonly)
+        self.toolbar.addAction(self.savefile)
+        self.toolbar.addAction(self.buildonly)
+        self.toolbar.addAction(self.buildrun)
+        self.toolbar.addAction(self.runonly)
         self.toolbar.addAction(exit)
 
     def onlybuild(self):
@@ -253,3 +261,13 @@ class MainWindow (PyQt4.QtGui.QMainWindow):
     def whenchanged(self):
         self.textedit.setFontFamily("monospace")
         self.currentfile.saved = False
+
+    def enable_controls(self):
+        self.savefile.setEnabled(True)
+        self.saveas.setEnabled(True)
+        self.buildonly.setEnabled(True)
+        self.buildrun.setEnabled(True)
+        self.runonly.setEnabled(True)
+        self.copy.setEnabled(True)
+        self.paste.setEnabled(True)
+        self.cut.setEnabled(True)

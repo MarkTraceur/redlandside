@@ -49,7 +49,7 @@ class SyntaxHighlighter(PyQt4.QtGui.QSyntaxHighlighter):
         self.rules = []
         rules = []
 
-		# C++
+        # C++
 
         if fileobj.language == "C++":
             kws = ['and','and_eq','asm','auto','bitand','bitor','bool',
@@ -77,7 +77,7 @@ class SyntaxHighlighter(PyQt4.QtGui.QSyntaxHighlighter):
             rules += [(r'%s' % w, 0, self.styles['brace']) for w in braces]
 
             rules += [
-				# Double-quote strings
+                # Double-quote strings
                 (r'"[^"\\]*(\\.[^"\\]*)*"', 0, self.styles['literal']),
                 # Single-quote strings
                 (r"'[^'\\]*(\\.[^'\\]*)*'", 0, self.styles['literal']),
@@ -87,7 +87,7 @@ class SyntaxHighlighter(PyQt4.QtGui.QSyntaxHighlighter):
                 (r'\/\/[^\n]*', 0, self.styles['comment'])
             ]
 
-		# PYTHON
+        # PYTHON
 
         elif fileobj.language == "Python":
             kws = ['and', 'del', 'for', 'is', 'raise', 'assert', 'elif',
@@ -108,9 +108,9 @@ class SyntaxHighlighter(PyQt4.QtGui.QSyntaxHighlighter):
             rules += [(r'%s' % w, 0, self.styles['brace']) for w in braces]
 
             rules += [
-				# Double-quote strings
-				(r'"[^"\\]*(\\.[^"\\]*)*"', 0, self.styles['literal']),
-				# Single-quote strings
+                # Double-quote strings
+                (r'"[^"\\]*(\\.[^"\\]*)*"', 0, self.styles['literal']),
+                # Single-quote strings
                 (r"'[^'\\]*(\\.[^'\\]*)*'", 0, self.styles['literal']),
                 # Numbers
                 (r'\b\d+\b', 0, self.styles['literal']),
@@ -118,7 +118,7 @@ class SyntaxHighlighter(PyQt4.QtGui.QSyntaxHighlighter):
                 (r'\#[^\n]*', 0, self.styles['comment'])
             ]
 
-		# LOLCODE
+        # LOLCODE
 
         elif fileobj.language == "LOLCODE":
             kws = ['HAI', 'KTHXBYE', 'VISIBLE', 'GIMMEH', 'I HAS A',
@@ -137,7 +137,7 @@ class SyntaxHighlighter(PyQt4.QtGui.QSyntaxHighlighter):
             rules += [(r'%s' % w, 0, self.styles['brace']) for w in braces]
 
             rules += [
-				# Double-quote strings
+                # Double-quote strings
                 (r'"[^"\\]*(\\.[^"\\]*)*"', 0, self.styles['literal']),
                 # Single-quote strings
                 (r"'[^'\\]*(\\.[^'\\]*)*'", 0, self.styles['literal']),
@@ -147,11 +147,11 @@ class SyntaxHighlighter(PyQt4.QtGui.QSyntaxHighlighter):
                 (r'BTW[^\n]*', 0, self.styles['comment'])
             ]
 
-		# PROLOG
+        # PROLOG
 
         elif fileobj.language == "Prolog":
             kws = ['block', 'dynamic', 'mode', 'module', 'multifile',
-			       'meta_predicate', 'parallel', 'sequential', 'volatile']
+                   'meta_predicate', 'parallel', 'sequential', 'volatile']
             rules += [(r'\b%s\b' % w, 0, self.styles['keyword']) for w in kws]
 
             # For prolog we use the preproc style to highlight
@@ -167,17 +167,17 @@ class SyntaxHighlighter(PyQt4.QtGui.QSyntaxHighlighter):
             rules += [(r'%s' % w, 0, self.styles['brace']) for w in braces]
 
             rules += [
-				# Double-quote strings
+                # Double-quote strings
                 (r'"[^"\\]*(\\.[^"\\]*)*"', 0, self.styles['literal']),
-				# Single-quote strings
+                # Single-quote strings
                 (r"'[^'\\]*(\\.[^'\\]*)*'", 0, self.styles['literal']),
-				# Numbers
+                # Numbers
                 (r'\b\d+\b', 0, self.styles['literal']),
-				# Comments
+                # Comments
                 (r'\%[^\n]*', 0, self.styles['comment'])
             ]
 
-		# LISP
+        # LISP
 
         elif fileobj.language == "Lisp":
             kws = ['car','cdr','setq','quote','eval','append','list','cons',
@@ -189,7 +189,7 @@ class SyntaxHighlighter(PyQt4.QtGui.QSyntaxHighlighter):
             rules += [(r'%s' % w, 0, self.styles['brace']) for w in braces]
 
             rules += [
-				# Double-quote strings
+                # Double-quote strings
                 (r'"[^"\\]*(\\.[^"\\]*)*"', 0, self.styles['literal']),
                 # Single-quote strings
                 (r"'[^'\\]*(\\.[^'\\]*)*'", 0, self.styles['literal']),
@@ -199,7 +199,7 @@ class SyntaxHighlighter(PyQt4.QtGui.QSyntaxHighlighter):
                 (r'\;[^\n]*', 0, self.styles['comment'])
             ]
 
-		# WHITESPACE
+        # WHITESPACE
 
         elif fileobj.language == "Whitespace":
             # OK, we're gonna do some crazy stuff with this one.
@@ -209,7 +209,7 @@ class SyntaxHighlighter(PyQt4.QtGui.QSyntaxHighlighter):
                 (r'\t', 0, self.styles['wstab'])
             ]
 
-        self.rules = [(QtCore.QRegExp(p), i, f) for (p, i, f) in rules]
+        self.rules = [(PyQt4.QtCore.QRegExp(p), i, f) for (p, i, f) in rules]
 
     def highlightBlock(self, text):
         # Do other syntax formatting
